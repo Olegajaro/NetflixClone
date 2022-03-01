@@ -23,6 +23,7 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupNavBar()
         setupViews()
     }
     
@@ -45,6 +46,45 @@ class HomeViewController: UIViewController {
             height: 450
         ))
         homeFeedTable.tableHeaderView = headerView
+    }
+    
+    private func setupNavBar() {
+        var image = UIImage(named: "netflixLogo")
+        image = image?.withRenderingMode(.alwaysOriginal)
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            image: image,
+            style: .done,
+            target: self,
+            action: nil
+        )
+        
+        navigationItem.rightBarButtonItems = [
+            UIBarButtonItem(
+                image: UIImage(systemName: "person"),
+                style: .done,
+                target: self,
+                action: nil
+            ),
+            UIBarButtonItem(
+                image: UIImage(systemName: "play.rectangle"),
+                style: .done,
+                target: self,
+                action: nil
+            )
+        ]
+        
+        navigationController?.navigationBar.tintColor = .systemRed
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let defaultOffset = view.safeAreaInsets.top
+        let offset = scrollView.contentOffset.y + defaultOffset
+        
+        navigationController?.navigationBar.transform = .init(
+            translationX: 0,
+            y: min(0, -offset)
+        )
     }
 }
 
