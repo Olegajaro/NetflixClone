@@ -38,6 +38,13 @@ class HomeViewController: UIViewController {
         
         homeFeedTable.delegate = self
         homeFeedTable.dataSource = self
+        
+        let headerView = HeroHeaderView(frame: CGRect(
+            x: 0, y: 0,
+            width: view.bounds.width,
+            height: 450
+        ))
+        homeFeedTable.tableHeaderView = headerView
     }
 }
 
