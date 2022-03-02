@@ -154,7 +154,7 @@ extension HomeViewController: UITableViewDelegate {
             height: header.bounds.height
         )
         header.textLabel?.textColor = .label
-        header.textLabel?.text = header.textLabel?.text?.lowercased()
+        header.textLabel?.text = header.textLabel?.text?.capitalizeFirstLetter()
     }
     
     func tableView(_ tableView: UITableView,

@@ -21,6 +21,7 @@
 		1018630227CE8813009D0DBE /* HeroHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1018630127CE8813009D0DBE /* HeroHeaderView.swift */; };
 		101E556727CFCF86008A35B2 /* APICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101E556627CFCF86008A35B2 /* APICaller.swift */; };
 		101E556927CFDBC2008A35B2 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101E556827CFDBC2008A35B2 /* Movie.swift */; };
+		10B8296527CFE35E00F4575B /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B8296427CFE35E00F4575B /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		1018630127CE8813009D0DBE /* HeroHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroHeaderView.swift; sourceTree = "<group>"; };
 		101E556627CFCF86008A35B2 /* APICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller.swift; sourceTree = "<group>"; };
 		101E556827CFDBC2008A35B2 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		10B8296427CFE35E00F4575B /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +83,7 @@
 				101862FE27CE76DF009D0DBE /* Views */,
 				101862F227CE6FCF009D0DBE /* Controllers */,
 				101E556527CFCF6D008A35B2 /* Services */,
+				10B8296327CFE34900F4575B /* Utils */,
 				101862F327CE6FE8009D0DBE /* Files */,
 			);
 			path = NetflixClone;
@@ -137,6 +140,14 @@
 				101E556627CFCF86008A35B2 /* APICaller.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		10B8296327CFE34900F4575B /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				10B8296427CFE35E00F4575B /* Extensions.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -217,6 +228,7 @@
 				101862FB27CE70D2009D0DBE /* DownloadsViewController.swift in Sources */,
 				1018630227CE8813009D0DBE /* HeroHeaderView.swift in Sources */,
 				101862DD27CE6DDD009D0DBE /* AppDelegate.swift in Sources */,
+				10B8296527CFE35E00F4575B /* Extensions.swift in Sources */,
 				101862DF27CE6DDD009D0DBE /* SceneDelegate.swift in Sources */,
 				101862F727CE7097009D0DBE /* UpcomingViewController.swift in Sources */,
 				101E556927CFDBC2008A35B2 /* Movie.swift in Sources */,
