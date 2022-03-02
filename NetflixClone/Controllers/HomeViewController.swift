@@ -30,6 +30,7 @@ class HomeViewController: UIViewController {
         
         setupNavBar()
         setupViews()
+        getTrendingMovies()
     }
     
     override func viewDidLayoutSubviews() {
@@ -90,6 +91,17 @@ class HomeViewController: UIViewController {
             translationX: 0,
             y: min(0, -offset)
         )
+    }
+    
+    private func getTrendingMovies() {
+        APICaller.shared.getTrendingMovies { result in
+            switch result {
+            case .success(let movies):
+                print(movies)
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 }
 
