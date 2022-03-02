@@ -15,7 +15,6 @@ struct Movie: Codable {
     let id: Int
     let mediaType: String?
     let originalTitle: String?
-    let originalName: String?
     let posterPath: String?
     let overview: String?
     let voteCount: Int
@@ -26,7 +25,6 @@ struct Movie: Codable {
         case id
         case mediaType = "media_type"
         case originalTitle = "original_title"
-        case originalName = "original_name"
         case posterPath = "poster_path"
         case overview
         case voteCount = "vote_count"

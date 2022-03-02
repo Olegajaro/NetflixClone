@@ -22,6 +22,9 @@
 		101E556727CFCF86008A35B2 /* APICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101E556627CFCF86008A35B2 /* APICaller.swift */; };
 		101E556927CFDBC2008A35B2 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101E556827CFDBC2008A35B2 /* Movie.swift */; };
 		10B8296527CFE35E00F4575B /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B8296427CFE35E00F4575B /* Extensions.swift */; };
+		10B8296727CFE9E800F4575B /* Tv.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B8296627CFE9E800F4575B /* Tv.swift */; };
+		10B8296927CFECC600F4575B /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B8296827CFECC600F4575B /* NetworkService.swift */; };
+		10B8296B27CFEF5A00F4575B /* NetworkDataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B8296A27CFEF5A00F4575B /* NetworkDataFetcher.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +45,9 @@
 		101E556627CFCF86008A35B2 /* APICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller.swift; sourceTree = "<group>"; };
 		101E556827CFDBC2008A35B2 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		10B8296427CFE35E00F4575B /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		10B8296627CFE9E800F4575B /* Tv.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tv.swift; sourceTree = "<group>"; };
+		10B8296827CFECC600F4575B /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		10B8296A27CFEF5A00F4575B /* NetworkDataFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDataFetcher.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				101E556827CFDBC2008A35B2 /* Movie.swift */,
+				10B8296627CFE9E800F4575B /* Tv.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -138,6 +145,8 @@
 			isa = PBXGroup;
 			children = (
 				101E556627CFCF86008A35B2 /* APICaller.swift */,
+				10B8296827CFECC600F4575B /* NetworkService.swift */,
+				10B8296A27CFEF5A00F4575B /* NetworkDataFetcher.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -227,11 +236,14 @@
 				101E556727CFCF86008A35B2 /* APICaller.swift in Sources */,
 				101862FB27CE70D2009D0DBE /* DownloadsViewController.swift in Sources */,
 				1018630227CE8813009D0DBE /* HeroHeaderView.swift in Sources */,
+				10B8296927CFECC600F4575B /* NetworkService.swift in Sources */,
 				101862DD27CE6DDD009D0DBE /* AppDelegate.swift in Sources */,
 				10B8296527CFE35E00F4575B /* Extensions.swift in Sources */,
+				10B8296B27CFEF5A00F4575B /* NetworkDataFetcher.swift in Sources */,
 				101862DF27CE6DDD009D0DBE /* SceneDelegate.swift in Sources */,
 				101862F727CE7097009D0DBE /* UpcomingViewController.swift in Sources */,
 				101E556927CFDBC2008A35B2 /* Movie.swift in Sources */,
+				10B8296727CFE9E800F4575B /* Tv.swift in Sources */,
 				101862F527CE706B009D0DBE /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

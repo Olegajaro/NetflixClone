@@ -18,33 +18,25 @@ enum APIError: Error {
 
 class APICaller {
     static let shared = APICaller()
-    private init() { }
     
-    func getTrendingMovies(completion: @escaping (Result<[Movie], Error>) -> Void) {
-        
-        guard
-            let url = URL(string: "\(Constans.baseURL)/3/trending/all/day?api_key=\(Constans.API_KEY)")
-        else { return }
-
-        let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
-            
-            guard let data = data, error == nil else {
-                completion(.failure(APIError.failedToGetData))
-                return
-            }
-
-            do {
-                let results = try JSONDecoder().decode(
-                    TrendingMoviesResponse.self,
-                    from: data
-                )
-                completion(.success(results.results))
-            } catch {
-                completion(.failure(error))
-            }
-        }
-        
-        task.resume()
+    var networkDataFetcher: NetworkDataFetcher!
+    
+    private init (networkDataFetcher: NetworkDataFetcher = NetworkDataFetcher()) {
+        self.networkDataFetcher = networkDataFetcher
+    }
+    
+    func getTrendingMovies(completion: @escaping (TrendingMoviesResponse?) -> Void) {
+        networkDataFetcher.fetchGenericJSONData(
+            url: "\(Constans.baseURL)/3/trending/movie/day?api_key=\(Constans.API_KEY)",
+            response: completion
+        )
+    }
+    
+    func getTrendingTvs(completion: @escaping (TrendingTvsResponse?) -> Void) {
+        networkDataFetcher.fetchGenericJSONData(
+            url: "\(Constans.baseURL)/3/trending/tv/day?api_key=\(Constans.API_KEY)",
+            response: completion
+        )
     }
 }
  
