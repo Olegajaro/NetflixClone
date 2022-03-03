@@ -29,6 +29,7 @@
 		10B8296527CFE35E00F4575B /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B8296427CFE35E00F4575B /* Extensions.swift */; };
 		10B8296927CFECC600F4575B /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B8296827CFECC600F4575B /* NetworkService.swift */; };
 		10B8296B27CFEF5A00F4575B /* NetworkDataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B8296A27CFEF5A00F4575B /* NetworkDataFetcher.swift */; };
+		10C558CA27D140C600021CB5 /* SearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10C558C927D140C600021CB5 /* SearchResultViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 		10B8296427CFE35E00F4575B /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		10B8296827CFECC600F4575B /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		10B8296A27CFEF5A00F4575B /* NetworkDataFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDataFetcher.swift; sourceTree = "<group>"; };
+		10C558C927D140C600021CB5 /* SearchResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,10 +108,8 @@
 		101862F227CE6FCF009D0DBE /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				101862F427CE706B009D0DBE /* HomeViewController.swift */,
-				101862F627CE7097009D0DBE /* UpcomingViewController.swift */,
-				101862F827CE70B6009D0DBE /* SearchViewController.swift */,
-				101862FA27CE70D2009D0DBE /* DownloadsViewController.swift */,
+				10C558CB27D1410C00021CB5 /* Core */,
+				10C558CD27D1415100021CB5 /* General */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -167,6 +167,25 @@
 				10B8296427CFE35E00F4575B /* Extensions.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		10C558CB27D1410C00021CB5 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				101862F427CE706B009D0DBE /* HomeViewController.swift */,
+				101862F627CE7097009D0DBE /* UpcomingViewController.swift */,
+				101862F827CE70B6009D0DBE /* SearchViewController.swift */,
+				101862FA27CE70D2009D0DBE /* DownloadsViewController.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		10C558CD27D1415100021CB5 /* General */ = {
+			isa = PBXGroup;
+			children = (
+				10C558C927D140C600021CB5 /* SearchResultViewController.swift */,
+			);
+			path = General;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,6 +276,7 @@
 				10435D3827D109EB00D4AE2B /* TitleViewModel.swift in Sources */,
 				101862DD27CE6DDD009D0DBE /* AppDelegate.swift in Sources */,
 				10B8296527CFE35E00F4575B /* Extensions.swift in Sources */,
+				10C558CA27D140C600021CB5 /* SearchResultViewController.swift in Sources */,
 				10B8296B27CFEF5A00F4575B /* NetworkDataFetcher.swift in Sources */,
 				101862DF27CE6DDD009D0DBE /* SceneDelegate.swift in Sources */,
 				10435D3627D107C700D4AE2B /* TitleTableViewCell.swift in Sources */,

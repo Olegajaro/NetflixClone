@@ -20,6 +20,15 @@ class SearchViewController: UIViewController {
         return table
     }()
     
+    private let searchController: UISearchController = {
+        let controller = UISearchController(
+            searchResultsController: SearchResultViewController()
+        )
+        controller.searchBar.placeholder = "Search for a Movie or a TV show"
+        controller.searchBar.searchBarStyle = .minimal
+        return controller
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -42,6 +51,10 @@ class SearchViewController: UIViewController {
         discoverTable.dataSource = self
         discoverTable.delegate = self
         discoverTable.rowHeight = 140
+        
+        navigationItem.searchController = searchController
+        navigationController?.navigationBar.tintColor = .label
+        
         view.addSubview(discoverTable)
     }
     
