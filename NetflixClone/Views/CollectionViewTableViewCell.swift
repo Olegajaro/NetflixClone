@@ -11,15 +11,21 @@ class CollectionViewTableViewCell: UITableViewCell {
 
     static let identifier = "CollectionViewTableViewCell"
     
+    private var titles: [Title] = []
+    
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: 140, height: 200)
         layout.scrollDirection = .horizontal
         
-        let collectionView = UICollectionView(frame: .zero,
-                                              collectionViewLayout: layout)
-        collectionView.register(UICollectionViewCell.self,
-                                forCellWithReuseIdentifier: "cell")
+        let collectionView = UICollectionView(
+            frame: .zero,
+            collectionViewLayout: layout
+        )
+        collectionView.register(
+            TitleCollectionViewCell.self,
+            forCellWithReuseIdentifier: TitleCollectionViewCell.identifier
+        )
         collectionView.showsHorizontalScrollIndicator = false
         return collectionView
     }()
@@ -43,6 +49,11 @@ class CollectionViewTableViewCell: UITableViewCell {
         
         collectionView.frame = contentView.bounds
     }
+    
+    public func configure(with titles: [Title]) {
+        self.titles = titles
+        collectionView.reloadData()
+    }
 }
 
 extension CollectionViewTableViewCell: UICollectionViewDataSource {
@@ -51,7 +62,7 @@ extension CollectionViewTableViewCell: UICollectionViewDataSource {
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
     ) -> Int {
-        10
+        titles.count
     }
     
     func collectionView(
@@ -59,12 +70,16 @@ extension CollectionViewTableViewCell: UICollectionViewDataSource {
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: "cell",
-            for: indexPath
-        )
+        guard
+            let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: TitleCollectionViewCell.identifier,
+                for: indexPath
+            ) as? TitleCollectionViewCell
+        else { return UICollectionViewCell()}
         
-        cell.backgroundColor = .green
+        let posterPath = titles[indexPath.row].posterPath ?? ""
+        
+        cell.configure(with: posterPath)
         
         return cell
     }

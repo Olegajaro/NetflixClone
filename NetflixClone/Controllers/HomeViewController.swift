@@ -7,6 +7,14 @@
 
 import UIKit
 
+enum Sections: Int {
+    case trendingMovies = 0
+    case tredingTV = 1
+    case popular = 2
+    case upcomingMovies = 3
+    case topRated = 4
+}
+
 class HomeViewController: UIViewController {
     
     let sectionTitles: [String] = [
@@ -30,8 +38,7 @@ class HomeViewController: UIViewController {
         
         setupNavBar()
         setupViews()
-        fetchData()
-    }
+     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -92,38 +99,6 @@ class HomeViewController: UIViewController {
             y: min(0, -offset)
         )
     }
-    
-    private func fetchData() {
-        APICaller.shared.getTrendingMovies { movies in
-            guard let movies = movies?.results else { return }
-
-            print(movies)
-        }
-        
-        APICaller.shared.getTrendingTvs { tvs in
-            guard let tvs = tvs?.results else { return }
-            
-            print(tvs)
-        }
-        
-        APICaller.shared.getPopularMovies { popularMovies in
-            guard let popularMovies = popularMovies?.results else { return }
-            
-            print(popularMovies)
-        }
-        
-        APICaller.shared.getUpcomingMovies { upcomingMovies in
-            guard let upcomingMovies = upcomingMovies?.results else { return }
-
-            print(upcomingMovies)
-        }
-        
-        APICaller.shared.getTopRatedMovies { topRatedMovies in
-            guard let topRatedMovies = topRatedMovies?.results else { return }
-            
-            print(topRatedMovies)
-        }
-    }
 }
 
 // MARK: - UITableViewDataSource
@@ -146,6 +121,41 @@ extension HomeViewController: UITableViewDataSource {
                 for: indexPath
             ) as? CollectionViewTableViewCell
         else { return UITableViewCell()}
+        
+        switch indexPath.section {
+        case Sections.trendingMovies.rawValue:
+            
+            APICaller.shared.getTrendingMovies { titles in
+                cell.configure(with: titles?.results ?? [])
+            }
+            
+        case Sections.tredingTV.rawValue:
+            
+            APICaller.shared.getTrendingTvs { titles in
+                cell.configure(with: titles?.results ?? [])
+            }
+            
+        case Sections.popular.rawValue:
+            
+            APICaller.shared.getPopularMovies { titles in
+                cell.configure(with: titles?.results ?? [])
+            }
+            
+        case Sections.upcomingMovies.rawValue:
+            
+            APICaller.shared.getUpcomingMovies { titles in
+                cell.configure(with: titles?.results ?? [])
+            }
+            
+        case Sections.topRated.rawValue:
+            
+            APICaller.shared.getTopRatedMovies { titles in
+                cell.configure(with: titles?.results ?? [])
+            }
+            
+        default:
+            return UITableViewCell()
+        }
         
         return cell
     }

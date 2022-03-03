@@ -1,5 +1,5 @@
 //
-//  MovieCollectionViewCell.swift
+//  TitleCollectionViewCell.swift
 //  NetflixClone
 //
 //  Created by Олег Федоров on 03.03.2022.
@@ -8,7 +8,7 @@
 import UIKit
 import SDWebImage
 
-class MovieCollectionViewCell: UICollectionViewCell {
+class TitleCollectionViewCell: UICollectionViewCell {
     
     static let identifier = "MovieCollectionViewCell"
     
@@ -35,7 +35,9 @@ class MovieCollectionViewCell: UICollectionViewCell {
     }
     
     public func configure(with model: String) {
-        guard let url = URL(string: model) else { return }
+        guard
+            let url = URL(string: "https://image.tmdb.org/t/p/w500\(model)")
+        else { return }
         posterImageView.sd_setImage(with: url)
     }
 }
