@@ -7,28 +7,32 @@
 
 import Foundation
 
-struct MoviesResponse: Codable {
-    let results: [Movie]
+struct TitleResponse: Codable {
+    let results: [Title]
 }
 
-struct Movie: Codable {
+struct Title: Codable {
     let id: Int
     let mediaType: String?
     let originalTitle: String?
+    let originalName: String?
     let posterPath: String?
     let overview: String?
     let voteCount: Int
     let releaseDate: String?
+    let firstAirDate: String?
     let voteAverage: Double
     
     enum CodingKeys: String, CodingKey {
         case id
         case mediaType = "media_type"
         case originalTitle = "original_title"
+        case originalName = "original_name"
         case posterPath = "poster_path"
         case overview
         case voteCount = "vote_count"
         case releaseDate = "release_date"
+        case firstAirDate = "first_air_date"
         case voteAverage = "vote_average"
     }
 }
