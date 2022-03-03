@@ -105,6 +105,24 @@ class HomeViewController: UIViewController {
             
             print(tvs)
         }
+        
+        APICaller.shared.getPopularMovies { popularMovies in
+            guard let popularMovies = popularMovies?.results else { return }
+            
+            print(popularMovies)
+        }
+        
+        APICaller.shared.getUpcomingMovies { upcomingMovies in
+            guard let upcomingMovies = upcomingMovies?.results else { return }
+
+            print(upcomingMovies)
+        }
+        
+        APICaller.shared.getTopRatedMovies { topRatedMovies in
+            guard let topRatedMovies = topRatedMovies?.results else { return }
+            
+            print(topRatedMovies)
+        }
     }
 }
 

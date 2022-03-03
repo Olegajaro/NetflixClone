@@ -7,6 +7,10 @@
 
 import Foundation
 
+enum APIError: Error {
+    case failedToGetData
+}
+
 class NetworkService {
     
     func request(url: String, completion: @escaping (Result<Data, Error>) -> Void) {
@@ -25,7 +29,7 @@ class NetworkService {
             
             guard let data = data, error == nil else {
                 if error != nil {
-                    completion(.failure(error!))
+                    completion(.failure(APIError.failedToGetData))
                 }
                 return
             }
