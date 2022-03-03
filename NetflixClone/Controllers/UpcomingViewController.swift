@@ -13,7 +13,10 @@ class UpcomingViewController: UIViewController {
     
     let upcomingTable: UITableView = {
         let table = UITableView()
-        table.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        table.register(
+            UpcomingTableViewCell.self,
+            forCellReuseIdentifier: UpcomingTableViewCell.identifier
+        )
         return table
     }()
     
@@ -28,6 +31,7 @@ class UpcomingViewController: UIViewController {
         view.addSubview(upcomingTable)
         upcomingTable.dataSource = self
         upcomingTable.delegate = self
+        upcomingTable.rowHeight = 140
         
         fetchUpcoming()
     }
@@ -55,16 +59,27 @@ extension UpcomingViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView,
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(
-            withIdentifier: "cell", for: indexPath
-        )
+        guard
+            let cell = tableView.dequeueReusableCell(
+                withIdentifier: UpcomingTableViewCell.identifier, for: indexPath
+            ) as? UpcomingTableViewCell
+        else { return UITableViewCell() }
         
-        cell.textLabel?.text = titles[indexPath.row].originalTitle ?? "Unknown"
+        let title = titles[indexPath.row]
+        
+        cell.configure(with: UpcomingViewModel(
+            titleName: (title.originalTitle ?? title.originalName) ?? "",
+            posterURL: title.posterPath ?? ""
+        ))
         
         return cell
     }
 }
 
 extension UpcomingViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView,
+                   didSelectRowAt indexPath: IndexPath) {
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 }
