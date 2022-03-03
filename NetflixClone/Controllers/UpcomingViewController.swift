@@ -14,8 +14,8 @@ class UpcomingViewController: UIViewController {
     let upcomingTable: UITableView = {
         let table = UITableView()
         table.register(
-            UpcomingTableViewCell.self,
-            forCellReuseIdentifier: UpcomingTableViewCell.identifier
+            TitleTableViewCell.self,
+            forCellReuseIdentifier: TitleTableViewCell.identifier
         )
         return table
     }()
@@ -23,6 +23,17 @@ class UpcomingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setupViews()
+        fetchUpcoming()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        upcomingTable.frame = view.bounds
+    }
+    
+    private func setupViews() {
         view.backgroundColor = .systemBackground
         title = "Upcoming"
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -32,14 +43,6 @@ class UpcomingViewController: UIViewController {
         upcomingTable.dataSource = self
         upcomingTable.delegate = self
         upcomingTable.rowHeight = 140
-        
-        fetchUpcoming()
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        upcomingTable.frame = view.bounds
     }
     
     private func fetchUpcoming() {
@@ -61,13 +64,13 @@ extension UpcomingViewController: UITableViewDataSource {
         
         guard
             let cell = tableView.dequeueReusableCell(
-                withIdentifier: UpcomingTableViewCell.identifier, for: indexPath
-            ) as? UpcomingTableViewCell
+                withIdentifier: TitleTableViewCell.identifier, for: indexPath
+            ) as? TitleTableViewCell
         else { return UITableViewCell() }
         
         let title = titles[indexPath.row]
         
-        cell.configure(with: UpcomingViewModel(
+        cell.configure(with: TitleViewModel(
             titleName: (title.originalTitle ?? title.originalName) ?? "",
             posterURL: title.posterPath ?? ""
         ))

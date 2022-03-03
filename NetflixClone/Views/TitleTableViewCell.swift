@@ -7,7 +7,7 @@
 
 import UIKit
 
-class UpcomingTableViewCell: UITableViewCell {
+class TitleTableViewCell: UITableViewCell {
 
     static let identifier = "UpcomingTableViewCell"
     
@@ -21,7 +21,7 @@ class UpcomingTableViewCell: UITableViewCell {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.adjustsFontSizeToFitWidth = true
+        label.numberOfLines = 0
         return label
     }()
     
@@ -51,7 +51,7 @@ class UpcomingTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    public func configure(with model: UpcomingViewModel) {
+    public func configure(with model: TitleViewModel) {
         guard
             let url = URL(string: "https://image.tmdb.org/t/p/w500\(model.posterURL)")
         else { return }
@@ -82,19 +82,20 @@ class UpcomingTableViewCell: UITableViewCell {
             ),
             titleLabel.leadingAnchor.constraint(
                 equalTo: titlePosterUIImageView.trailingAnchor, constant: 16
-            ),
-            titleLabel.trailingAnchor.constraint(
-                equalTo: playTitleButton.leadingAnchor, constant: -16
             )
         ]
         
         let playTitleButtonConstraints = [
-            playTitleButton.trailingAnchor.constraint(
-                equalTo: contentView.trailingAnchor, constant: -20
-            ),
             playTitleButton.centerYAnchor.constraint(
                 equalTo: contentView.centerYAnchor
-            )
+            ),
+            playTitleButton.leadingAnchor.constraint(
+                equalTo: titleLabel.trailingAnchor, constant: 16
+            ),
+            playTitleButton.trailingAnchor.constraint(
+                equalTo: contentView.trailingAnchor, constant: -16
+            ),
+            playTitleButton.widthAnchor.constraint(equalToConstant: 50)
         ]
         
         NSLayoutConstraint.activate(titlePosterUIImageViewConstraints)
