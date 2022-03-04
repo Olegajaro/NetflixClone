@@ -38,7 +38,7 @@ class HomeViewController: UIViewController {
         
         setupNavBar()
         setupViews()
-     }
+    }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -122,6 +122,8 @@ extension HomeViewController: UITableViewDataSource {
             ) as? CollectionViewTableViewCell
         else { return UITableViewCell()}
         
+        cell.delegate = self
+        
         switch indexPath.section {
         case Sections.trendingMovies.rawValue:
             
@@ -194,4 +196,16 @@ extension HomeViewController: UITableViewDelegate {
     }
 }
 
-
+extension HomeViewController: CollectionViewTableViewCellDelegate {
+    
+    func collectionViewTableViewCellDidTapped(
+        _ cell: CollectionViewTableViewCell,
+        viewModel: TitlePreviewViewModel
+    ) {
+        DispatchQueue.main.async { [weak self] in
+            let viewController = TitlePreviewController()
+            viewController.configure(with: viewModel)
+            self?.navigationController?.pushViewController(viewController, animated: true)
+        }
+    }
+}
