@@ -38,6 +38,8 @@ class HomeViewController: UIViewController {
         
         setupNavBar()
         setupViews()
+        
+        APICaller.shared.getMovie(with: "Harry Potter")
      }
     
     override func viewDidLayoutSubviews() {
