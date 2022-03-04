@@ -38,10 +38,6 @@ class HomeViewController: UIViewController {
         
         setupNavBar()
         setupViews()
-        
-        APICaller.shared.getMovie(with: "Harry") { query in
-            print(query?.items.description ?? "")
-        }
      }
     
     override func viewDidLayoutSubviews() {

@@ -86,5 +86,18 @@ extension CollectionViewTableViewCell: UICollectionViewDataSource {
 }
 
 extension CollectionViewTableViewCell: UICollectionViewDelegate {
-    
+    func collectionView(_ collectionView: UICollectionView,
+                        didSelectItemAt indexPath: IndexPath) {
+        
+        collectionView.deselectItem(at: indexPath, animated: true)
+        
+        let title = titles[indexPath.row]
+        guard
+            let titleName = title.originalTitle ?? title.originalName
+        else { return }
+        
+        APICaller.shared.getMovie(with: titleName + " trailer") { searchResponse in
+            print(searchResponse?.items.first?.id ?? "")
+        }
+    }
 }
