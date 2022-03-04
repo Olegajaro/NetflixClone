@@ -9,9 +9,9 @@ import UIKit
 
 class SearchResultViewController: UIViewController {
     
-    private var titles: [Title] = []
+    public var titles: [Title] = []
     
-    private let searchResultsCollectionView: UICollectionView = {
+    public let searchResultsCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(
             width: UIScreen.main.bounds.width / 3 - 6,
@@ -53,7 +53,7 @@ extension SearchResultViewController: UICollectionViewDataSource {
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
     ) -> Int {
-        10
+        titles.count
     }
     
     func collectionView(
@@ -68,7 +68,8 @@ extension SearchResultViewController: UICollectionViewDataSource {
             ) as? TitleCollectionViewCell
         else { return UICollectionViewCell() }
         
-        cell.backgroundColor = .blue
+        let title = titles[indexPath.row]
+        cell.configure(with: title.posterPath ?? "")
         
         return cell
     }

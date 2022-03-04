@@ -45,15 +45,17 @@ class SearchViewController: UIViewController {
     private func setupViews() {
         view.backgroundColor = .systemBackground
         title = "Search"
+        
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationItem.largeTitleDisplayMode = .always
+        navigationController?.navigationBar.tintColor = .label
         
         discoverTable.dataSource = self
         discoverTable.delegate = self
         discoverTable.rowHeight = 140
         
         navigationItem.searchController = searchController
-        navigationController?.navigationBar.tintColor = .label
+        searchController.searchResultsUpdater = self
         
         view.addSubview(discoverTable)
     }
@@ -98,5 +100,26 @@ extension SearchViewController: UITableViewDelegate {
                    didSelectRowAt indexPath: IndexPath) {
         
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+}
+
+extension SearchViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        
+        let searchBar = searchController.searchBar
+        
+        guard
+            let query = searchBar.text,
+            !query.trimmingCharacters(in: .whitespaces).isEmpty,
+            query.trimmingCharacters(in: .whitespaces).count >= 3,
+            let resultsController = searchController.searchResultsController as? SearchResultViewController
+        else { return }
+        
+        APICaller.shared.search(with: query) { titles in
+            guard let titles = titles?.results else { return }
+            
+            resultsController.titles = titles
+            resultsController.searchResultsCollectionView.reloadData()
+        }
     }
 }
