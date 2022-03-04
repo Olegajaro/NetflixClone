@@ -81,22 +81,9 @@ class APICaller {
             let query = query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
         else { return }
         
-        let stringUrl = "\(Constans.youtubeBaseURL)q=\(query)&key=\(Constans.API_KEY_YOUTUBE)"
-        
-        guard let url = URL(string: stringUrl) else { return }
-        
-        let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
-            
-            guard let data = data, error == nil else { return }
-            
-            do {
-                let results = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
-                print(results)
-            } catch  {
-                print(error.localizedDescription)
-            }
-        }
-        
-        task.resume()
+        networkDataFetcher.fetchGenericJSONData(
+            url: "\(Constans.youtubeBaseURL)q=\(query)&key=\(Constans.API_KEY_YOUTUBE)",
+            response: completion
+        )
     }
 }
