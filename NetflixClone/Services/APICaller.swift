@@ -8,7 +8,7 @@
 import Foundation
 
 struct Constans {
-    static let API_KEY = "APIKEY"
+    static let API_KEY = "APIKEY_tmdb"
     static let API_KEY_YOUTUBE = "APIKEY_youtube"
     static let baseURL = "https://api.themoviedb.org"
     static let youtubeBaseURL = "https://youtube.googleapis.com/youtube/v3/search?"
