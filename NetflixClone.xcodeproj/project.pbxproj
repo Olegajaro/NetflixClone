@@ -30,6 +30,7 @@
 		10B8296927CFECC600F4575B /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B8296827CFECC600F4575B /* NetworkService.swift */; };
 		10B8296B27CFEF5A00F4575B /* NetworkDataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B8296A27CFEF5A00F4575B /* NetworkDataFetcher.swift */; };
 		10C558CA27D140C600021CB5 /* SearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10C558C927D140C600021CB5 /* SearchResultViewController.swift */; };
+		10CD7EB127D218360079B39C /* YoutubeSearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10CD7EB027D218360079B39C /* YoutubeSearchResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,7 @@
 		10B8296827CFECC600F4575B /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		10B8296A27CFEF5A00F4575B /* NetworkDataFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDataFetcher.swift; sourceTree = "<group>"; };
 		10C558C927D140C600021CB5 /* SearchResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewController.swift; sourceTree = "<group>"; };
+		10CD7EB027D218360079B39C /* YoutubeSearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YoutubeSearchResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				101E556827CFDBC2008A35B2 /* Title.swift */,
+				10CD7EB027D218360079B39C /* YoutubeSearchResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -272,6 +275,7 @@
 				101E556727CFCF86008A35B2 /* APICaller.swift in Sources */,
 				101862FB27CE70D2009D0DBE /* DownloadsViewController.swift in Sources */,
 				1018630227CE8813009D0DBE /* HeroHeaderView.swift in Sources */,
+				10CD7EB127D218360079B39C /* YoutubeSearchResponse.swift in Sources */,
 				10B8296927CFECC600F4575B /* NetworkService.swift in Sources */,
 				10435D3827D109EB00D4AE2B /* TitleViewModel.swift in Sources */,
 				101862DD27CE6DDD009D0DBE /* AppDelegate.swift in Sources */,
