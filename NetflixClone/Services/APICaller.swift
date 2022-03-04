@@ -76,7 +76,7 @@ class APICaller {
         )
     }
     
-    func getMovie(with query: String) {
+    func getMovie(with query: String, completion: @escaping (YoutubeSearchResponse?) -> Void) {
         guard
             let query = query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
         else { return }
