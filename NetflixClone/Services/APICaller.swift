@@ -8,8 +8,8 @@
 import Foundation
 
 struct Constans {
-    static let API_KEY = "e03261ca92ace993fcd082703951db23"
-    static let API_KEY_YOUTUBE = "AIzaSyDJvnnPsM-laLz7tO7H6X-W8B4eH3uKcnU"
+    static let API_KEY = "APIKEY"
+    static let API_KEY_YOUTUBE = "APIKEY_youtube"
     static let baseURL = "https://api.themoviedb.org"
     static let youtubeBaseURL = "https://youtube.googleapis.com/youtube/v3/search?"
 }
@@ -100,15 +100,3 @@ class APICaller {
         task.resume()
     }
 }
- 
-// https://api.themoviedb.org/3/movie/upcoming?api_key=e03261ca92ace993fcd082703951db23&language=en-US&page=1
-
-// https://api.themoviedb.org/3/movie/popular?api_key=e03261ca92ace993fcd082703951db23&language=en-US&page=1
-
-// https://api.themoviedb.org/3/movie/top_rated?api_key=e03261ca92ace993fcd082703951db23&language=en-US&page=1
-
-// https://api.themoviedb.org/3/discover/movie?api_key=e03261ca92ace993fcd082703951db23&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate
-
-// https://api.themoviedb.org/3/search/movie?api_key={api_key}&query=Jack+Reacher
-
-// https://youtube.googleapis.com/youtube/v3/search?q=Harry&key=AIzaSyDJvnnPsM-laLz7tO7H6X-W8B4eH3uKcnU
