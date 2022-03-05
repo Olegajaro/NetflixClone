@@ -67,13 +67,17 @@ class CollectionViewTableViewCell: UITableViewCell {
         collectionView.reloadData()
     }
     
+    // MARK: - Save title to download section
     private func downloadTitleAt(indexPath: IndexPath) {
         DatabaseService.shared.downloadTitleWith(
             model: titles[indexPath.row]
         ) { result in
             switch result {
             case .success():
-                print("DEBUG: downloaded to Database")
+                NotificationCenter.default.post(
+                    name: NSNotification.Name("downloaded"),
+                    object: nil
+                )
             case .failure(let error):
                 print(error.localizedDescription)
             }

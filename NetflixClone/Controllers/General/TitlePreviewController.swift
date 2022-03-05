@@ -10,6 +10,7 @@ import WebKit
 
 class TitlePreviewController: UIViewController {
 
+    // MARK: - UIElements
     private let webView: WKWebView = {
         let webView = WKWebView()
         webView.translatesAutoresizingMaskIntoConstraints = false
@@ -20,7 +21,6 @@ class TitlePreviewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 22, weight: .bold)
-        label.text = "Hatty Potter"
         return label
     }()
     
@@ -28,7 +28,6 @@ class TitlePreviewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 18, weight: .regular)
-        label.text = "Harry Potter best film ever in the world mother fuckers ladys and gentlemens"
         label.numberOfLines = 0
         return label
     }()
@@ -43,6 +42,7 @@ class TitlePreviewController: UIViewController {
         return button
     }()
     
+    // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -54,6 +54,7 @@ class TitlePreviewController: UIViewController {
         applyConstraints()
     }
     
+    // MARK: - Layout UIElements
     private func applyConstraints() {
         
         let webViewConstraints = [
@@ -108,6 +109,7 @@ class TitlePreviewController: UIViewController {
         NSLayoutConstraint.activate(downloadButtonConstraints)
     }
     
+    // MARK: - Configure
     func configure(with model: TitlePreviewViewModel) {
         titleLabel.text = model.title
         overviewLabel.text = model.titleOverview

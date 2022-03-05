@@ -11,6 +11,7 @@ class DownloadsViewController: UIViewController {
 
     private var titles: [TitleItem] = [TitleItem]()
     
+    // MARK: - UIElements
     private let downloadedTable: UITableView = {
         let table = UITableView()
         table.register(
@@ -20,13 +21,22 @@ class DownloadsViewController: UIViewController {
         return table
     }()
     
+    // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupViews()
         fetchLocalStorageForDownload()
+        createObserver()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        downloadedTable.frame = view.bounds
+    }
+    
+    // MARK: - Setup Views
     private func setupViews() {
         view.backgroundColor = .systemBackground
         
@@ -40,13 +50,8 @@ class DownloadsViewController: UIViewController {
         
         view.addSubview(downloadedTable)
     }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        downloadedTable.frame = view.bounds
-    }
-    
+
+    // MARK: - Private Methods
     private func fetchLocalStorageForDownload() {
         DatabaseService.shared.fetchTitlesFromDatabase { [weak self] result in
             switch result {
@@ -58,8 +63,19 @@ class DownloadsViewController: UIViewController {
             }
         }
     }
+    
+    private func createObserver() {
+        NotificationCenter.default.addObserver(
+            forName: NSNotification.Name("downloaded"),
+            object: nil,
+            queue: nil
+        ) { _ in
+            self.fetchLocalStorageForDownload()
+        }
+    }
 }
 
+// MARK: - UITableViewDataSource
 extension DownloadsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int) -> Int {
@@ -87,10 +103,37 @@ extension DownloadsViewController: UITableViewDataSource {
     }
 }
 
+// MARK: - UITableViewDelegate
 extension DownloadsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView,
                    didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        let title = titles[indexPath.row]
+        
+        guard
+            let titleName = title.originalTitle ?? title.originalName
+        else { return }
+        
+        APICaller.shared.getMovie(
+            with: titleName + " trailer"
+        ) { [weak self] searchResponse in
+            let viewController = TitlePreviewController()
+            
+            guard
+                let videoElement = searchResponse?.items.first,
+                let overview = title.overview
+            else { return }
+            
+            viewController.configure(with: TitlePreviewViewModel(
+                title: titleName,
+                youtubeVideo: videoElement,
+                titleOverview: overview
+            ))
+            
+            self?.navigationController?.pushViewController(viewController,
+                                                     animated: true)
+        }
     }
     
     func tableView(_ tableView: UITableView,
