@@ -17,6 +17,9 @@ enum Sections: Int {
 
 class HomeViewController: UIViewController {
     
+    private var randomTrendingMovie: Title?
+    private var headerView: HeroHeaderView?
+    
     let sectionTitles: [String] = [
         "Trending Movies", "Trending TV", "Popular",
         "Upcoming Movies", "Top Rated"
@@ -37,6 +40,7 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         
         setupNavBar()
+        configureHeroHeaderView()
         setupViews()
     }
     
@@ -53,7 +57,7 @@ class HomeViewController: UIViewController {
         homeFeedTable.delegate = self
         homeFeedTable.dataSource = self
         
-        let headerView = HeroHeaderView(frame: CGRect(
+        headerView = HeroHeaderView(frame: CGRect(
             x: 0, y: 0,
             width: view.bounds.width,
             height: 450
@@ -88,6 +92,24 @@ class HomeViewController: UIViewController {
         ]
         
         navigationController?.navigationBar.tintColor = .systemRed
+    }
+    
+    private func configureHeroHeaderView() {
+        
+        APICaller.shared.getTrendingMovies { [weak self] titles in
+            let randomTitle = titles?.results.randomElement()
+            self?.randomTrendingMovie = randomTitle
+            
+            guard
+                let titleName = randomTitle?.originalTitle,
+                let posterURL = randomTitle?.posterPath
+            else { return }
+        
+            self?.headerView?.configure(with: TitleViewModel(
+                titleName: titleName,
+                posterURL: posterURL
+            ))
+        }
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -202,10 +224,9 @@ extension HomeViewController: CollectionViewTableViewCellDelegate {
         _ cell: CollectionViewTableViewCell,
         viewModel: TitlePreviewViewModel
     ) {
-        DispatchQueue.main.async { [weak self] in
-            let viewController = TitlePreviewController()
-            viewController.configure(with: viewModel)
-            self?.navigationController?.pushViewController(viewController, animated: true)
-        }
+        let viewController = TitlePreviewController()
+        viewController.configure(with: viewModel)
+        self.navigationController?.pushViewController(viewController,
+                                                      animated: true)
     }
 }

@@ -13,7 +13,6 @@ class HeroHeaderView: UIView {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        imageView.image = UIImage(named: "heroImage")
         return imageView
     }()
     
@@ -54,6 +53,14 @@ class HeroHeaderView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    public func configure(with model: TitleViewModel) {
+        guard
+            let url = URL(string: "https://image.tmdb.org/t/p/w500\(model.posterURL)")
+        else { return }
+        
+        heroImageView.sd_setImage(with: url)
     }
     
     private func addGradient() {
