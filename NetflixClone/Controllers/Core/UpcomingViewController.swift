@@ -11,6 +11,7 @@ class UpcomingViewController: UIViewController {
 
     private var titles: [Title] = []
     
+    // MARK: - UIElements
     let upcomingTable: UITableView = {
         let table = UITableView()
         table.register(
@@ -20,6 +21,7 @@ class UpcomingViewController: UIViewController {
         return table
     }()
     
+    // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -33,6 +35,7 @@ class UpcomingViewController: UIViewController {
         upcomingTable.frame = view.bounds
     }
     
+    // MARK: - Setup Views
     private func setupViews() {
         view.backgroundColor = .systemBackground
         title = "Upcoming"
@@ -45,6 +48,7 @@ class UpcomingViewController: UIViewController {
         upcomingTable.rowHeight = 140
     }
     
+    // MARK: - Fetch data
     private func fetchUpcoming() {
         APICaller.shared.getUpcomingMovies { [weak self] titles in
             self?.titles = titles?.results ?? []
@@ -53,6 +57,7 @@ class UpcomingViewController: UIViewController {
     }
 }
 
+// MARK: - UITableViewDataSource
 extension UpcomingViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int) -> Int {
@@ -79,10 +84,37 @@ extension UpcomingViewController: UITableViewDataSource {
     }
 }
 
+// MARK: - UITableViewDelegate
 extension UpcomingViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView,
                    didSelectRowAt indexPath: IndexPath) {
         
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        let title = titles[indexPath.row]
+        
+        guard
+            let titleName = title.originalTitle ?? title.originalName
+        else { return }
+        
+        APICaller.shared.getMovie(
+            with: titleName + " trailer"
+        ) { [weak self] searchResponse in
+            let viewController = TitlePreviewController()
+            
+            guard
+                let videoElement = searchResponse?.items.first,
+                let overview = title.overview
+            else { return }
+            
+            viewController.configure(with: TitlePreviewViewModel(
+                title: titleName,
+                youtubeVideo: videoElement,
+                titleOverview: overview
+            ))
+            
+            self?.navigationController?.pushViewController(viewController,
+                                                     animated: true)
+        }
     }
 }

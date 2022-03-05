@@ -7,10 +7,17 @@
 
 import UIKit
 
+protocol SearchResultViewControllerDelegate: AnyObject {
+    func searchResultViewControllerDidTapItem(_ viewModel: TitlePreviewViewModel)
+}
+
 class SearchResultViewController: UIViewController {
+    
+    weak var delegate: SearchResultViewControllerDelegate?
     
     public var titles: [Title] = []
     
+    // MARK: - UIElements
     public let searchResultsCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(
@@ -30,6 +37,7 @@ class SearchResultViewController: UIViewController {
         return collectionView
     }()
     
+    // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -48,6 +56,7 @@ class SearchResultViewController: UIViewController {
     }
 }
 
+// MARK: - UICollectionViewDataSource
 extension SearchResultViewController: UICollectionViewDataSource {
     func collectionView(
         _ collectionView: UICollectionView,
@@ -75,6 +84,33 @@ extension SearchResultViewController: UICollectionViewDataSource {
     }
 }
 
+// MARK: - UICollectionViewDelegate
 extension SearchResultViewController: UICollectionViewDelegate {
-    
+    func collectionView(_ collectionView: UICollectionView,
+                        didSelectItemAt indexPath: IndexPath) {
+        
+        collectionView.deselectItem(at: indexPath, animated: true)
+        
+        let title = titles[indexPath.item]
+        
+        guard
+            let titleName = title.originalTitle ?? title.originalName,
+            let overview = title.overview
+        else { return }
+        
+        APICaller.shared.getMovie(
+            with: titleName + " trailer"
+        ) { [weak self] searchResponse in
+            
+            guard let videoElement = searchResponse?.items.first else { return }
+            
+            self?.delegate?.searchResultViewControllerDidTapItem(
+                TitlePreviewViewModel(
+                title: titleName,
+                youtubeVideo: videoElement,
+                titleOverview: overview
+                )
+            )
+        }
+    }
 }

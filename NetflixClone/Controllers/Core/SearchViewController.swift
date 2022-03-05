@@ -11,6 +11,7 @@ class SearchViewController: UIViewController {
 
     private var titles: [Title] = []
     
+    // MARK: - UIElements
     private let discoverTable: UITableView = {
         let table = UITableView()
         table.register(
@@ -29,6 +30,7 @@ class SearchViewController: UIViewController {
         return controller
     }()
     
+    // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -42,6 +44,7 @@ class SearchViewController: UIViewController {
         discoverTable.frame = view.bounds
     }
     
+    // MARK: - Setup Views
     private func setupViews() {
         view.backgroundColor = .systemBackground
         title = "Search"
@@ -60,6 +63,7 @@ class SearchViewController: UIViewController {
         view.addSubview(discoverTable)
     }
     
+    // MARK: - Fetch data
     private func fetchDiscoverMovies() {
         APICaller.shared.getDiscoverMovies { [weak self] titles in
             guard let titles = titles?.results else { return }
@@ -70,6 +74,7 @@ class SearchViewController: UIViewController {
     }
 }
 
+// MARK: - UITableViewDataSource
 extension SearchViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int) -> Int {
@@ -95,14 +100,42 @@ extension SearchViewController: UITableViewDataSource {
     }
 }
 
+// MARK: - UITableViewDelegate
 extension SearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView,
                    didSelectRowAt indexPath: IndexPath) {
         
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        let title = titles[indexPath.row]
+        
+        guard
+            let titleName = title.originalTitle ?? title.originalName
+        else { return }
+        
+        APICaller.shared.getMovie(
+            with: titleName + " trailer"
+        ) { [weak self] searchResponse in
+            let viewController = TitlePreviewController()
+            
+            guard
+                let videoElement = searchResponse?.items.first,
+                let overview = title.overview
+            else { return }
+            
+            viewController.configure(with: TitlePreviewViewModel(
+                title: titleName,
+                youtubeVideo: videoElement,
+                titleOverview: overview
+            ))
+            
+            self?.navigationController?.pushViewController(viewController,
+                                                     animated: true)
+        }
     }
 }
 
+// MARK: - UISearchResultsUpdating
 extension SearchViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         
@@ -115,11 +148,24 @@ extension SearchViewController: UISearchResultsUpdating {
             let resultsController = searchController.searchResultsController as? SearchResultViewController
         else { return }
         
+        resultsController.delegate = self
+        
         APICaller.shared.search(with: query) { titles in
             guard let titles = titles?.results else { return }
             
             resultsController.titles = titles
             resultsController.searchResultsCollectionView.reloadData()
         }
+    }
+}
+
+// MARK: - SearchResultViewControllerDelegate
+extension SearchViewController: SearchResultViewControllerDelegate {
+    func searchResultViewControllerDidTapItem(
+        _ viewModel: TitlePreviewViewModel
+    ) {
+        let viewController = TitlePreviewController()
+        viewController.configure(with: viewModel)
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }
