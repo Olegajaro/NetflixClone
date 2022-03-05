@@ -22,6 +22,7 @@ class CollectionViewTableViewCell: UITableViewCell {
     
     private var titles: [Title] = []
     
+    // MARK: - UIElements
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: 140, height: 200)
@@ -39,6 +40,7 @@ class CollectionViewTableViewCell: UITableViewCell {
         return collectionView
     }()
     
+    // MARK: - Subview Lifecycle
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -59,12 +61,18 @@ class CollectionViewTableViewCell: UITableViewCell {
         collectionView.frame = contentView.bounds
     }
     
+    // MARK: - Configure
     public func configure(with titles: [Title]) {
         self.titles = titles
         collectionView.reloadData()
     }
+    
+    private func downloadTitleAt(indexPath: IndexPath) {
+        print("DEBUG: downloading \(titles[indexPath.row].originalTitle ?? "")")
+    }
 }
 
+// MARK: - UICollectionViewDataSource
 extension CollectionViewTableViewCell: UICollectionViewDataSource {
     
     func collectionView(
@@ -94,6 +102,7 @@ extension CollectionViewTableViewCell: UICollectionViewDataSource {
     }
 }
 
+// MARK: - UICollectionViewDelegate
 extension CollectionViewTableViewCell: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView,
                         didSelectItemAt indexPath: IndexPath) {
@@ -122,6 +131,30 @@ extension CollectionViewTableViewCell: UICollectionViewDelegate {
                 viewModel: viewModel
             )
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        contextMenuConfigurationForItemAt indexPath: IndexPath,
+                        point: CGPoint) -> UIContextMenuConfiguration? {
+        
+        let config = UIContextMenuConfiguration(
+            identifier: nil,
+            previewProvider: nil
+        ) { _ in
+            let downloadAction = UIAction(
+                title: "Download",
+                state: .off) { [weak self] _ in
+                    self?.downloadTitleAt(indexPath: indexPath)
+                }
+            
+            return UIMenu(
+                title: "",
+                options: .displayInline,
+                children: [downloadAction]
+            )
+        }
+        
+        return config
     }
 }
 
