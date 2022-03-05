@@ -26,6 +26,7 @@
 		10AC5F0C27D0AD4B00946578 /* TitleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10AC5F0B27D0AD4B00946578 /* TitleCollectionViewCell.swift */; };
 		10AC5F0F27D0AEB100946578 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 10AC5F0E27D0AEB100946578 /* SDWebImage */; };
 		10AC5F1127D0AEB100946578 /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 10AC5F1027D0AEB100946578 /* SDWebImageMapKit */; };
+		10B1754427D3D20600232860 /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B1754327D3D20600232860 /* DatabaseService.swift */; };
 		10B8296527CFE35E00F4575B /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B8296427CFE35E00F4575B /* Extensions.swift */; };
 		10B8296927CFECC600F4575B /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B8296827CFECC600F4575B /* NetworkService.swift */; };
 		10B8296B27CFEF5A00F4575B /* NetworkDataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B8296A27CFEF5A00F4575B /* NetworkDataFetcher.swift */; };
@@ -33,6 +34,7 @@
 		10CD7EB127D218360079B39C /* YoutubeSearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10CD7EB027D218360079B39C /* YoutubeSearchResponse.swift */; };
 		10E1BC4C27D258AC00E6DB2D /* TitlePreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E1BC4B27D258AC00E6DB2D /* TitlePreviewController.swift */; };
 		10E1BC4E27D25B5A00E6DB2D /* TitlePreviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E1BC4D27D25B5A00E6DB2D /* TitlePreviewViewModel.swift */; };
+		10E2E3C527D3CFCD0013061D /* NetflixClone.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 10E2E3C327D3CFCD0013061D /* NetflixClone.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +57,7 @@
 		10435D3527D107C700D4AE2B /* TitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleTableViewCell.swift; sourceTree = "<group>"; };
 		10435D3727D109EB00D4AE2B /* TitleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleViewModel.swift; sourceTree = "<group>"; };
 		10AC5F0B27D0AD4B00946578 /* TitleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCollectionViewCell.swift; sourceTree = "<group>"; };
+		10B1754327D3D20600232860 /* DatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseService.swift; sourceTree = "<group>"; };
 		10B8296427CFE35E00F4575B /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		10B8296827CFECC600F4575B /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		10B8296A27CFEF5A00F4575B /* NetworkDataFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDataFetcher.swift; sourceTree = "<group>"; };
@@ -62,6 +65,7 @@
 		10CD7EB027D218360079B39C /* YoutubeSearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YoutubeSearchResponse.swift; sourceTree = "<group>"; };
 		10E1BC4B27D258AC00E6DB2D /* TitlePreviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitlePreviewController.swift; sourceTree = "<group>"; };
 		10E1BC4D27D25B5A00E6DB2D /* TitlePreviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitlePreviewViewModel.swift; sourceTree = "<group>"; };
+		10E2E3C427D3CFCD0013061D /* NetflixClone.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NetflixClone.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +111,7 @@
 				101E556527CFCF6D008A35B2 /* Services */,
 				10B8296327CFE34900F4575B /* Utils */,
 				101862F327CE6FE8009D0DBE /* Files */,
+				10E2E3C327D3CFCD0013061D /* NetflixClone.xcdatamodeld */,
 			);
 			path = NetflixClone;
 			sourceTree = "<group>";
@@ -165,6 +170,7 @@
 				101E556627CFCF86008A35B2 /* APICaller.swift */,
 				10B8296827CFECC600F4575B /* NetworkService.swift */,
 				10B8296A27CFEF5A00F4575B /* NetworkDataFetcher.swift */,
+				10B1754327D3D20600232860 /* DatabaseService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -287,11 +293,13 @@
 				10435D3827D109EB00D4AE2B /* TitleViewModel.swift in Sources */,
 				101862DD27CE6DDD009D0DBE /* AppDelegate.swift in Sources */,
 				10B8296527CFE35E00F4575B /* Extensions.swift in Sources */,
+				10E2E3C527D3CFCD0013061D /* NetflixClone.xcdatamodeld in Sources */,
 				10E1BC4C27D258AC00E6DB2D /* TitlePreviewController.swift in Sources */,
 				10C558CA27D140C600021CB5 /* SearchResultViewController.swift in Sources */,
 				10B8296B27CFEF5A00F4575B /* NetworkDataFetcher.swift in Sources */,
 				101862DF27CE6DDD009D0DBE /* SceneDelegate.swift in Sources */,
 				10435D3627D107C700D4AE2B /* TitleTableViewCell.swift in Sources */,
+				10B1754427D3D20600232860 /* DatabaseService.swift in Sources */,
 				101862F727CE7097009D0DBE /* UpcomingViewController.swift in Sources */,
 				101E556927CFDBC2008A35B2 /* Title.swift in Sources */,
 				101862F527CE706B009D0DBE /* HomeViewController.swift in Sources */,
@@ -527,6 +535,19 @@
 			productName = SDWebImageMapKit;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		10E2E3C327D3CFCD0013061D /* NetflixClone.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				10E2E3C427D3CFCD0013061D /* NetflixClone.xcdatamodel */,
+			);
+			currentVersion = 10E2E3C427D3CFCD0013061D /* NetflixClone.xcdatamodel */;
+			path = NetflixClone.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 101862D127CE6DDD009D0DBE /* Project object */;
 }

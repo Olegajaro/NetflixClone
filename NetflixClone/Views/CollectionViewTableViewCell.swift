@@ -68,7 +68,16 @@ class CollectionViewTableViewCell: UITableViewCell {
     }
     
     private func downloadTitleAt(indexPath: IndexPath) {
-        print("DEBUG: downloading \(titles[indexPath.row].originalTitle ?? "")")
+        DatabaseService.shared.downloadTitleWith(
+            model: titles[indexPath.row]
+        ) { result in
+            switch result {
+            case .success():
+                print("DEBUG: downloaded to Database")
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
 }
 
