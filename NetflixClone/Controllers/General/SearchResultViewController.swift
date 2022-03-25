@@ -54,6 +54,23 @@ class SearchResultViewController: UIViewController {
         
         searchResultsCollectionView.frame = view.bounds
     }
+    
+    // MARK: - Save title to download section
+    private func downloadTitleAt(indexPath: IndexPath) {
+        DatabaseService.shared.downloadTitleWith(
+            model: titles[indexPath.row]
+        ) { result in
+            switch result {
+            case .success():
+                NotificationCenter.default.post(
+                    name: NSNotification.Name("downloaded"),
+                    object: nil
+                )
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
 }
 
 // MARK: - UICollectionViewDataSource
@@ -112,5 +129,29 @@ extension SearchResultViewController: UICollectionViewDelegate {
                 )
             )
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        contextMenuConfigurationForItemAt indexPath: IndexPath,
+                        point: CGPoint) -> UIContextMenuConfiguration? {
+        
+        let config = UIContextMenuConfiguration(
+            identifier: nil,
+            previewProvider: nil
+        ) { _ in
+            let downloadAction = UIAction(
+                title: "Download",
+                state: .off) { [weak self] _ in
+                    self?.downloadTitleAt(indexPath: indexPath)
+                }
+            
+            return UIMenu(
+                title: "",
+                options: .displayInline,
+                children: [downloadAction]
+            )
+        }
+        
+        return config
     }
 }

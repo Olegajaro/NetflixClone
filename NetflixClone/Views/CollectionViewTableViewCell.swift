@@ -70,7 +70,7 @@ class CollectionViewTableViewCell: UITableViewCell {
     // MARK: - Save title to download section
     private func downloadTitleAt(indexPath: IndexPath) {
         DatabaseService.shared.downloadTitleWith(
-            model: titles[indexPath.row]
+            model: titles[indexPath.item]
         ) { result in
             switch result {
             case .success():
